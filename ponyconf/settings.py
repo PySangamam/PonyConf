@@ -27,7 +27,7 @@ SECRET_KEY = 'm2d03t^m)!nsborq5a1#e!#m)wjl&-%tu4ew@fxf1_b_t*@36r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cfp.pysangamam.org', 'localhost']
 
 
 # Application definition
@@ -156,6 +156,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -230,8 +231,14 @@ CACHES = {
 
 SELECT2_CACHE_BACKEND = 'select2'
 
-SERVER_EMAIL = 'ponyconf@example.com'
+DEFAULT_FROM_EMAIL = 'cfp@pysangamam.org'
+SERVER_EMAIL = 'cfp@pysangamam.org'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
+EMAIL_HOST = 'mail.gandi.net'
+EMAIL_HOST_USER = 'cfp@pysangamam.org'
+EMAIL_HOST_PASSWORD = "PinkFluffyUnicornsDancingOnRainbow"
+EMAIL_USE_TLS=True
+EMAIL_SUBJECT_PREFIX = "[PySangamam] "
+EMAIL_PORT = 587
+
 
