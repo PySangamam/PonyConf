@@ -324,13 +324,13 @@ Thanks!
         send_message(
             thread=speaker.conversation,
             author=request.conference,
-            subject=_("[%(conference)s] Thank you for your proposition '%(talk)s'") % {
+            subject=_("[%(conference)s] Thank you for your proposal '%(talk)s'") % {
                 'conference': request.conference.name,
                 'talk': talk,
             },
             content=body,
         )
-        messages.success(request, _('You proposition have been successfully submitted!'))
+        messages.success(request, _('You proposal has been successfully submitted!'))
         return redirect(reverse('proposal-talk-details', kwargs=dict(speaker_token=speaker.token, talk_id=talk.pk)))
     return render(request, 'cfp/proposal_home.html', {
         'speaker_form': speaker_form,
