@@ -66,14 +66,19 @@ def send_message_notifications(sender, instance, **kwargs):
             user_subject = _('[%(conference)s] Message from the staff') % {'conference': str(conf)}
             staff_subject = _('[%(conference)s] Conversation with %(user)s') % {'conference': str(conf), 'user': str(user)}
         if author == user: # message from the user, notify the staff
+            ## Author sending message to reviewer
             message.send_notification(sender=sender, dests=staff_dests, reply_to=reply_to, message_id=message_id, reference=reference, subject=staff_subject)
         else: # message to the user, notify the user, and the staff if the message is not a conference notification
+            ## The message from the user-profile page
             message.send_notification(sender=sender, dests=dests, reply_to=reply_to, message_id=message_id, reference=reference, subject=user_subject)
             if author != conf:
                 message.send_notification(sender=sender, dests=staff_dests, reply_to=reply_to, message_id=message_id, reference=reference, subject=staff_subject)
     elif hasattr(thread, 'talk'):
         message.send_notification(sender=sender, dests=staff_dests,
                                   reply_to=reply_to, message_id=message_id, reference=reference)
+        ## Send the reviewer's comment to the speakers also (be careful with indentation - use spaces not tabs)
+        speaker_dests = [ (user, user.name, user.email) for user in thread.talk.speakers.all() ]
+        message.send_notification(sender=sender, dests=speaker_dests, reply_to=reply_to, message_id=message_id, reference=reference)
 
 
 # connected in apps.py

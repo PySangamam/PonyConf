@@ -97,8 +97,8 @@
 </p>
 <p>{{ talk.vote_set.count }} {% trans "vote" %}{{ talk.vote_set.count|pluralize }}, {% trans "average:" %} {{ talk.score|floatformat:1 }}</p>
 
-<a href="{% url 'talk-accept' talk.pk %}" class="btn btn-success">{% trans "Accept" %}</a>
-<a href="{% url 'talk-decline' talk.pk %}" class="btn btn-danger">{% trans "Decline" %}</a>
+<!-- Removed the Accept/Decline button. Not needed for Pysangamam -->
+
 {% elif talk.accepted == True and talk.confirmed == None %}
 <h3>{% trans "Speaker confirmation" %}</h3>
 
@@ -125,7 +125,7 @@
 
 {% include 'mailing/_message_list.html' with messages=talk.conversation.message_set.all %}
 
-{% trans "Comment this talk – <em>this message will be received by the staff team only</em>" as message_form_title %}
+{% trans "Comment this talk – <em>this message will be received by the staff team and the authors</em>" as message_form_title %}
 {% include 'mailing/_message_form.html' %}
 
 {% endblock %}
